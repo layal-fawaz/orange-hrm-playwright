@@ -15,4 +15,4 @@ where = ["."]
 include = ["pages*"]
 
 [tool.pylint.messages_control]
-disable = ["missing-module-docstring", "missing-function-docstring"]
+disable = ["missing-module-docstring", "missing-function-docstring", "too-few-public-methods"]
