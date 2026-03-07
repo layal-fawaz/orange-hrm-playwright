@@ -28,16 +28,16 @@ def login(page: Page) -> None:
     page.get_by_role("button", name="Login").click()
 
 
-def employeeDetails(page, firstName, lastName, Id):
+def employeeDetails(page, first_name, last_name,employee_id):
     page.get_by_role("link", name="PIM").click()
     page.get_by_role("link", name="Add Employee").click()
 
     page.get_by_role("textbox", name="First Name").click()
-    page.get_by_role("textbox", name="First Name").fill(firstName)
+    page.get_by_role("textbox", name="First Name").fill(first_name)
     page.get_by_role("textbox", name="Last Name").click()
-    page.get_by_role("textbox", name="Last Name").fill(lastName)
+    page.get_by_role("textbox", name="Last Name").fill(last_name)
     page.get_by_role("textbox").nth(4).click()
-    page.get_by_role("textbox").nth(4).fill(Id)
+    page.get_by_role("textbox").nth(4).fill(employee_id)
 
 
 def testAddEmployeeMismatchedPasswords(page: Page) -> None:

@@ -21,5 +21,8 @@ jobs:
       - name: Install Playwright Browsers
         run: playwright install --with-deps
 
+      - name: Run pylint
+        run: python -m pylint pages/ tests/
+        
       - name: Run tests
         run: pytest tests/
