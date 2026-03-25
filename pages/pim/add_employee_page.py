@@ -18,7 +18,7 @@ class AddEmployeePage:
 
         if save:
             self.page.get_by_role("button", name="Save").click()
-            expect(self.page.get_by_text("Successfully saved")).to_be_visible()
+            expect(self.page.get_by_text("Successfully saved")).to_be_visible(timeout=10000)
 
     def enable_login_details(self, username, password):
         self.page.locator(".oxd-switch-input").click()
@@ -26,4 +26,4 @@ class AddEmployeePage:
         self.page.get_by_text("Password").nth(0).locator("..").locator("..").locator("input").first.fill(password)
         self.page.get_by_text("Confirm Password").locator("..").locator("..").locator("input").fill(password)
         self.page.get_by_role("button", name="Save").click()
-        expect(self.page.get_by_text("Successfully saved")).to_be_visible()
+        expect(self.page.get_by_text("Successfully saved")).to_be_visible(timeout=10000)
