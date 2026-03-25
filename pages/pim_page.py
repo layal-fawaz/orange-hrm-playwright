@@ -13,4 +13,4 @@ class PimPage:
 
     def visit_tab_employee_list(self):
         self.page.get_by_text("Employee List").click()
-        expect(self.page.get_by_role("heading", name="Employee List")).to_be_visible()
+        expect(self.page.get_by_text("Employee Information")).to_be_visible()
