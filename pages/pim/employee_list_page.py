@@ -21,3 +21,12 @@ class EmployeeListPage:
 
     def assert_employee_found(self, value):
         expect(self.page.get_by_text(value)).to_be_visible()
+
+    def delete_employee(self,employee_id):
+        self.fill_employee_id_input(employee_id)
+        self.click_search()
+        self.page.locator("i.bi-trash").locator("..").first.click()
+        self.page.get_by_role("button", name="Yes, Delete").click()
+        expect(self.page.get_by_text("Successfully Deleted")).to_be_visible()
+
+
