@@ -1,5 +1,5 @@
 from playwright.sync_api import Page,expect
-
+from utils.decorators import pw_trace
 class EmployeeListPage:
     """Page object for Employee List page."""
     def __init__(self,page:Page):
@@ -21,7 +21,7 @@ class EmployeeListPage:
 
     def assert_employee_found(self, value):
         expect(self.page.get_by_text(value)).to_be_visible()
-
+    @pw_trace()
     def delete_employee(self,employee_id):
         self.fill_employee_id_input(employee_id)
         self.click_search()

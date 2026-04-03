@@ -6,6 +6,7 @@ from pages.pim.add_employee_page import AddEmployeePage
 from pages.pim.employee_list_page import EmployeeListPage
 from pages.recruitment_page import RecruitmentPage
 from pages.recruitment.vacancy_page import VacancyPage
+from utils.decorators import pw_trace
 
 
 @pytest.fixture(autouse=True)
@@ -14,6 +15,7 @@ def login(page):
     login_page = LoginPage(page)
     login_page.navigate()
     login_page.login_with_valid_admin()
+
 
 
 @pytest.fixture
@@ -30,6 +32,7 @@ def employee_list_page_fixture(page):
     pim_page = PimPage(page)
     pim_page.visit_tab_employee_list()
     return EmployeeListPage(page)
+
 
 
 @pytest.fixture
@@ -52,6 +55,7 @@ def created_employee_fixture(page):
     employee_list = EmployeeListPage(page)
     employee_list.delete_employee(employee_id)
 
+
 @pytest.fixture
 def created_hiring_manager_fixture(page):
     pim_page = PimPage(page)
@@ -66,6 +70,7 @@ def created_hiring_manager_fixture(page):
     }
     PimPage(page).visit_tab_employee_list()
     EmployeeListPage(page).delete_employee(employee_id)
+
 
 @pytest.fixture
 def vacancy_page_fixture(page, created_hiring_manager_fixture):

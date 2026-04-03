@@ -1,8 +1,10 @@
 from playwright.sync_api import expect,Page
+from utils.decorators import pw_trace
 class AddEmployeePage:
     """Page object for Add Employee page"""
     def __init__(self, page:Page):
         self.page = page
+    @pw_trace("Add Employee")
     def add_employee(self, first_name,middle_name,last_name, save=True):
         self.page.get_by_placeholder("First Name").fill(first_name)
         self.page.get_by_placeholder("Middle Name").fill(middle_name)
@@ -23,10 +25,11 @@ class AddEmployeePage:
                 .locator("..")
                 .locator("..")
                 .locator(".oxd-input"))
-
+    
+    
     def get_employee_id(self):
        return self.get_id_input_locator().input_value()
-
+    @pw_trace("Enable Login Details")
     def enable_login_details(self, username, password):
         self.page.locator(".oxd-switch-input").click()
         self.page.get_by_text("Username").locator("..").locator("..").locator(".oxd-input").fill(username)

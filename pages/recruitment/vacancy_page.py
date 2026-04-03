@@ -1,13 +1,14 @@
 from playwright.sync_api import Page,expect
+from utils.decorators import pw_trace
 class VacancyPage: 
     """Page object for Vacancy page."""
     def __init__(self,page:Page):
         self.page = page
-        
+    @pw_trace("Vacancy > Navigate to Vacancy")
     def go_to_add_vacancy(self):
         self.page.get_by_role("button",name="Add").click()
         expect(self.page.get_by_role("heading", name="Add Vacancy")).to_be_visible()
-
+    @pw_trace("Vacancy > Add Vacancy")
     def add_vacancy(self,vacancy_name,job_title,description,hiring_manager,number_of_positions):
         self.page.get_by_text("Vacancy Name").locator("..").locator("..").locator(".oxd-input").fill(vacancy_name)
         self.page.get_by_text("Job Title").locator("..").locator("..").locator(".oxd-select-wrapper").click()
@@ -20,13 +21,13 @@ class VacancyPage:
         self.page.get_by_role("button",name="Save").click()
         # expect(self.page.get_by_text("Successfully Saved")).to_be_visible(timeout=10000)
         expect(self.page.get_by_role("heading", name="Edit Vacancy")).to_be_visible(timeout=10000)
-    
+    @pw_trace("Vacancy > Search Vacancy")
     def search_vacancy(self, vacancy_name):
         self.page.locator(".oxd-input-group", has_text="Vacancy").locator(".oxd-select-wrapper").click()
         self.page.get_by_role("option", name=vacancy_name).click()
         self.page.get_by_role("button", name="Search").click()
         expect(self.page.locator(".oxd-table-card").filter(has_text=vacancy_name)).to_be_visible()
-    
+    @pw_trace("Vacancy > Delete Vacancy")
     def delete_vacancy(self, vacancy_name):
         self.search_vacancy(vacancy_name)
         row = self.page.locator(".oxd-table-card").filter(has_text=vacancy_name)
