@@ -208,3 +208,6 @@ marimo/_lsp/
 __marimo__/
 
 test-results/
+tests/e2e/test-results/
+*.zip
+*.webm
