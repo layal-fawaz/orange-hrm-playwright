@@ -16,3 +16,7 @@ include = ["pages*"]
 
 [tool.pylint.messages_control]
 disable = ["missing-module-docstring", "missing-function-docstring", "too-few-public-methods"]
+
+[tool.playwright]
+headless = false
+trace = "on" 
