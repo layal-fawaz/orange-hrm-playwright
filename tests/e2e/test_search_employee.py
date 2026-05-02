@@ -1,24 +1,25 @@
-def test_search_employee_by_id(employee_list_page_fixture):
-    employee_list_page_fixture.fill_employee_id_input("0295")
+import pytest
+def test_search_employee_by_id(created_employee_fixture, employee_list_page_fixture):
+    employee_id = created_employee_fixture["id"]
+    employee_list_page_fixture.fill_employee_id_input(employee_id)
     employee_list_page_fixture.click_search()
-    employee_list_page_fixture.assert_employee_found("0295")
+    employee_list_page_fixture.assert_employee_found(employee_id)
 
-def test_search_employee_by_not_found_id(employee_list_page_fixture):
-    employee_list_page_fixture.fill_employee_id_input("099")
-    employee_list_page_fixture.click_search()
-    employee_list_page_fixture.search_fail()
-
-def test_search_employee_by_not_found_name(employee_list_page_fixture):
-    employee_list_page_fixture.fill_employee_name_input("Layal")
+@pytest.mark.parametrize("invalid_id",["999387"])
+def test_search_employee_by_not_found_id(employee_list_page_fixture,invalid_id):
+    employee_list_page_fixture.fill_employee_id_input(invalid_id)
     employee_list_page_fixture.click_search()
     employee_list_page_fixture.search_fail()
 
-def test_search_employee_by_name(employee_list_page_fixture):
-    employee_list_page_fixture.fill_employee_name_input("Amelia")
+@pytest.mark.parametrize("invalid_name",["juususu"])
+def test_search_employee_by_not_found_name(employee_list_page_fixture,invalid_name):
+    employee_list_page_fixture.fill_employee_name_input(invalid_name)
     employee_list_page_fixture.click_search()
-    employee_list_page_fixture.assert_employee_found("Amelia")
+    employee_list_page_fixture.search_fail()
 
-# def test_search_employee_by_full_name(employee_list_page_fixture):
-#     employee_list_page_fixture.fill_employee_name_input("aniket t t")
-#     employee_list_page_fixture.click_search()
-#     employee_list_page_fixture.assert_employee_found("aniket t")
+def test_search_employee_by_name(created_employee_fixture,employee_list_page_fixture):
+    name=created_employee_fixture["name"]
+    employee_list_page_fixture.fill_employee_name_input(name)
+    employee_list_page_fixture.click_search()
+    employee_list_page_fixture.assert_employee_found(name)
+

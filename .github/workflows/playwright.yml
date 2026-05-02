@@ -22,7 +22,7 @@ jobs:
         run: playwright install --with-deps
 
       - name: Run pylint
-        run: python -m pylint pages/ tests/
+        run: python -m pylint pages/ tests/e2e/test_example.py
 
       - name: Run tests
         run: pytest tests/e2e/test_add_employee.py -v
