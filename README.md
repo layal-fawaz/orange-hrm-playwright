@@ -1,4 +1,4 @@
-# OrangeHRM UI Automation Framework
+# OrangeHRM UI Automation Framework - Playwright (python)
 
 ## Overview
 
